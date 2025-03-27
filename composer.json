@@ -1,0 +1,30 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "roger-sites/config",
+    "type": "project",
+    "description": "Configurations utils",
+    "keywords": [
+        "configurations",
+        "utils"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "RogerSites\\Configurations\\": "src/Configurations/"
+        },
+        "files": [
+            "src/Configurations/helpers.php"
+        ]
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RogerSites\\Configurations\\ServiceProvider"
+            ]
+        }
+    }
+}
