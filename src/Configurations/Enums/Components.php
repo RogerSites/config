@@ -2,14 +2,6 @@
 
 namespace RogerSites\Configurations\Enums;
 
-/**
- * Class Components
- *
- * This class allows to define static components
- *
- * @package RogerSites\Configurations\Enums
- * @author  Eborio Linárez
- */
 enum Components: int
 {
    case ACCESS = 1;
