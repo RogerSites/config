@@ -19,8 +19,9 @@ class PAMsRepo
     /**
      * Get configuration by PAM and component
      *
-     * @param int $pam PAM ID
-     * @param int $component Component ID
+     * @param int $pam
+     * @param int $component
+     * @return PAM|null
      */
     public function getConfigurationByPAMAndComponent(int $pam, int $component)
     {
@@ -34,9 +35,26 @@ class PAMsRepo
     }
 
     /**
+     * Get configurations by BackOffice URL
+     *
+     * @param string $boURL
+     * @return Builder[]|Collection
+     */
+    public function getConfigurationsByBackOfficeURL(string $boURL): Collection|array
+    {
+        return PAM::on(config('configurations.replica'))
+            ->select('id AS pam_id', 'internal_name', 'public_name', 'legal_name', 'pam_status_id', 'site_url',
+                'backoffice_url', 'configurations.pam_id', 'configurations.data')
+            ->join('configurations', 'pams.id', '=', 'configurations.pam_id')
+            ->where('backoffice_url', $boURL)
+            ->orderBy('component_id', 'ASC')
+            ->get();
+    }
+
+    /**
      * Get configurations by site URL
      *
-     * @param string $siteURL PAM site URL
+     * @param string $siteURL
      * @return Builder[]|Collection
      */
     public function getConfigurationsBySiteURL(string $siteURL): Collection|array
@@ -53,7 +71,7 @@ class PAMsRepo
     /**
      * Get configurations by PAM
      *
-     * @param int $pam PAM ID
+     * @param int $pam
      * @return Builder[]|Collection
      */
     public function getConfigurationsByPAM(int $pam): Collection|array

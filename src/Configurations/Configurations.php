@@ -2,6 +2,7 @@
 
 namespace RogerSites\Configurations;
 
+use Illuminate\Database\Eloquent\Collection;
 use RogerSites\Configurations\Enums\Components;
 use RogerSites\Configurations\Repositories\PAMsRepo;
 
@@ -10,8 +11,8 @@ class Configurations
     /**
      * Get component configuration
      *
-     * @param int $pam PAM ID
-     * @param int $component Component ID
+     * @param int $pam
+     * @param int $component
      * @return mixed
      */
     public static function getComponentConfiguration(int $pam, int $component): mixed
@@ -23,10 +24,22 @@ class Configurations
     /**
      * Get configurations by domain
      *
-     * @param string $domain PAM ID
-     * @return mixed
+     * @param string $domain
+     * @return Collection|array
      */
-    public static function getConfigurationsBySiteURL(string $domain): mixed
+    public static function getConfigurationsByBackOfficeURL(string $domain): Collection|array
+    {
+        $pamsRepo = new PAMsRepo();
+        return $pamsRepo->getConfigurationsByBackOfficeURL($domain);
+    }
+
+    /**
+     * Get configurations by domain
+     *
+     * @param string $domain
+     * @return Collection|array
+     */
+    public static function getConfigurationsBySiteURL(string $domain): Collection|array
     {
         $pamsRepo = new PAMsRepo();
         return $pamsRepo->getConfigurationsBySiteURL($domain);
@@ -86,8 +99,8 @@ class Configurations
     /**
      * Get logo
      *
-     * @param bool $mobile Mobile device
-     * @param integer|null $pam PAM ID
+     * @param bool $mobile
+     * @param integer|null $pam
      * @return string
      */
     public static function getLogo(bool $mobile = false, int $pam = null): string
@@ -148,7 +161,7 @@ class Configurations
     /**
      * Get PAM description
      *
-     * @param int|null $pam PAM ID
+     * @param int|null $pam
      * @return mixed
      */
     public static function getPAMPublicName(int $pam = null): mixed
@@ -168,7 +181,7 @@ class Configurations
      *
      * @return mixed
      */
-    public static function getPWA()
+    public static function getPWA(): mixed
     {
         $configurations = config('pam.configurations');
         $configuration = $configurations[Components::SERVICES->value - 1]->data;
@@ -196,9 +209,9 @@ class Configurations
     /**
      * Set email
      *
-     * @param null|int $pam Whitelabel ID
+     * @param int|null $pam
      */
-    public static function setEmail($pam = null): void
+    public static function setEmail(int $pam = null): void
     {
         if (!is_null($pam)) {
             $configuration = self::getComponentConfiguration($pam, Components::SERVICES->value);
