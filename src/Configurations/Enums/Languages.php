@@ -14,7 +14,7 @@ enum Languages: string
      * @param $language
      * @return string
      */
-    public function getName($language): string
+    public static function getName($language): string
     {
         return match ($language) {
             self::ES_CL => _i('Spanish'),
