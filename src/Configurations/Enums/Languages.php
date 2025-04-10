@@ -16,9 +16,13 @@ enum Languages: string
      */
     public static function getName($language): string
     {
-        return match ($language) {
-            self::es_CL => _i('Spanish'),
-            self::en_US => _i('English')
-        };
+        switch ($language) {
+            case self::es_CL: {
+                return _i('Spanish');
+            }
+            case self::en_US: {
+                return _i('English');
+            }
+        }
     }
 }
