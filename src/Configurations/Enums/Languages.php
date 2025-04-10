@@ -11,11 +11,12 @@ enum Languages: string
     /**
      * Get name
      *
+     * @param $language
      * @return string
      */
-    public function getName(): string
+    public function getName($language): string
     {
-        return match ($this) {
+        return match ($language) {
             self::ES_CL => _i('Spanish'),
             self::EN_US => _i('English')
         };
