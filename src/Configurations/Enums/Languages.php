@@ -4,9 +4,9 @@ namespace RogerSites\Configurations\Enums;
 
 enum Languages: string
 {
-    case ES_CL = 'es_CL';
+    case es_CL = 'es_CL';
 
-    case EN_US = 'en_US';
+    case en_US = 'en_US';
 
     /**
      * Get name
@@ -17,8 +17,8 @@ enum Languages: string
     public static function getName($language): string
     {
         return match ($language) {
-            self::ES_CL => _i('Spanish'),
-            self::EN_US => _i('English')
+            self::es_CL => _i('Spanish'),
+            self::en_US => _i('English')
         };
     }
 }
